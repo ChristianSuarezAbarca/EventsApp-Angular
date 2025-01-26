@@ -1,0 +1,25 @@
+<div class="container">
+    <form class="mt-4" role="form" [formGroup]="loginForm" (ngSubmit)='sendLogin()'>
+        <legend>Welcome to SVTickets!</legend>
+        <div class="mb-3">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email" [validationClasses]="{valid: 'is-valid', invalid: 'is-invalid'}">
+            @let emailErrors = loginForm.get('email')?.errors; 
+            @if(emailErrors?.['required']) {
+                <div class="invalid-feedback">Email is required</div>
+            }
+        </div>
+        <div class="mb-3">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password" [validationClasses]="{valid: 'is-valid', invalid: 'is-invalid'}">
+            @let passwordErrors = loginForm.get('password')?.errors; 
+            @if(passwordErrors?.['required']) {
+                <div class="invalid-feedback">Password is required</div>
+            }
+        </div>
+        <a class="btn btn-secondary" role="button" [routerLink]="['/register']">Create account</a>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <google-login class="btn" (login)="loggedGoogle($event)"></google-login>
+        <button fbLogin [scopes]="['email', 'public_profile']" class="btn btn-primary" (loginOk)="loggedFacebook($event)" (loginError)="showError($event)"><fa-icon [icon]="iconFacebook"></fa-icon>Login con Facebook</button>
+    </form>
+</div>

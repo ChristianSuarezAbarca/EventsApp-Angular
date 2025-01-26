@@ -1,0 +1,74 @@
+<div class="container">
+    <form class="mt-4" role="form" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+        <legend>Create an account</legend>
+        <div class="mb-3">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name" [validationClasses]="{valid: 'is-valid', invalid: 'is-invalid'}">
+            @let nameErrors = registerForm.get('name')?.errors; 
+            @if(nameErrors?.['required']) {
+                <div class="invalid-feedback">Name is required</div>
+            }
+        </div>
+        <div formGroupName="emailGroup">
+            <div class="mb-3">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email" [validationClasses]="{valid: 'is-valid', invalid: 'is-invalid'}">
+                @let emailErrors = registerForm.get('emailGroup.email')?.errors; 
+                @if(emailErrors?.['required']) {
+                    <div class="invalid-feedback">Email is required</div>
+                }
+                @if(emailErrors?.['email']) {
+                    <div class="invalid-feedback">Email should be like that: example&#64;gmail.com</div>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="email2">Repeat Email:</label>
+                <input type="email" class="form-control" id="email2" placeholder="Email" formControlName="email2" [validationClasses]="{valid: 'is-valid', invalid: 'is-invalid'}">
+                @let emailErrors2 = registerForm.get('emailGroup.email2')?.errors; 
+                @if(emailErrors2?.['required']) {
+                    <div class="invalid-feedback">Email is required</div>
+                }
+                @if(emailErrors2?.['email']) {
+                    <div class="invalid-feedback">Email should be like that: example&#64;gmail.com</div>
+                }
+                @if(registerForm.get('emailGroup')?.hasError('match')) {
+                    <div class="invalid-feedback">Emails do not match</div>
+                }
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password" [validationClasses]="{valid: 'is-valid', invalid: 'is-invalid'}">
+            @let passwordErrors = registerForm.get('password')?.errors; 
+            @if(passwordErrors?.['required']) {
+                <div class="invalid-feedback">Password is required</div>
+            }
+            @if(passwordErrors?.['minlength']) {
+                <div class="invalid-feedback">Password should have 4 characters or more</div>
+            }
+        </div>
+        <div class="form-row">
+            <div class="mb-3 col">
+                <label for="lat">Latitude:</label>
+                <input type="text" class="form-control" id="lat" placeholder="Geolocating..." readonly="readonly" formControlName="lat">
+            </div>
+            <div class="mb-3 col">
+                <label for="lng">Longitude:</label>
+                <input type="text" class="form-control" id="lng" placeholder="Geolocating..." readonly="readonly" formControlName="lng">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="avatar">Avatar image</label>
+            <input type="file" class="form-control" id="photo" formControlName="avatar" [validationClasses]="{valid: 'is-valid', invalid: 'is-invalid'}" encodeBase64 (encoded)="createUser($event)">
+            @let avatarErrors = registerForm.get('avatar')?.errors; 
+            @if(avatarErrors?.['required']) {
+                <div class="invalid-feedback">Avatar is required</div>
+            }
+        </div>
+        @if (registerForm.get('avatar')!.value !== ''){
+            <img [src]="user.avatar" alt="Avatar image" id="imgPreview" class="img-thumbnail" style="height: 200px;"><br><br>
+        }
+        <a class="btn btn-secondary" role="button" [routerLink]="['/login']">Go back</a>
+        <button type="submit" class="btn btn-primary">Create account</button>
+    </form>
+</div>

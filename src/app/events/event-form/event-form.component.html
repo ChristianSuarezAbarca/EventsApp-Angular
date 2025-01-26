@@ -1,0 +1,28 @@
+<form class="mt-4" (ngSubmit)="createEvent()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" name="title" id="title" placeholder="Enter title" [(ngModel)]="newEvent.title">
+    </div>
+    <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input type="date" class="form-control" id="date" name="date" [(ngModel)]="newEvent.date">
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" name="description" rows="3" [(ngModel)]="newEvent.description"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price (in €)</label>
+      <input type="number" class="form-control" id="price" name="price" min="0.00" max="10000.00" step="0.01" [(ngModel)]="newEvent.price">
+    </div>
+    <div class="mb-3">
+      <label for="image">Image</label>
+      <input type="file" class="form-control" id="image" name="image" encodeBase64 (encoded)="newEvent.image = $event">
+    </div>
+    @if (newEvent.image){
+      <img [src]="newEvent.image" alt="Image preview" id="imgPreview" class="img-thumbnail mb-3" style="height: 200px;">
+    }
+    <div>
+      <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+</form>
