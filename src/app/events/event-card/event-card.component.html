@@ -5,14 +5,15 @@
     	<p class="card-text">{{ event().description }}</p>
 		<div class="row">
             @if(event().mine){ 
+				<a class="btn btn-success" [routerLink]="['/events', event().id, 'edit']" style="width: 100px; height: 40px; margin-left: 12px;">Edit</a>
+
 				<div class="col">
-					<button class="btn btn-danger delete" (click)="deleteEvent(event().id)"><i class="bi bi-trash"></i></button>
+					<button class="btn btn-danger delete text-align" (click)="deleteEvent(event().id)"><i class="bi bi-trash d-flex align-items-center"></i></button>
 				</div>
 			}
   			<div class="col-auto ms-auto">
-              	<div class="text-end attend-users"><i class="bi bi-people-fill"></i>{{ event().numAttend }}</div>
-				<div style="cursor: pointer;" class="text-success text-end m-0 attend-button" (click)='attendEvent(event().id)'><i [class]="this.thumbClass"></i>{{ this.going }}</div>
-              	<!-- Change to bi-hand-thumbs-down-fill if the user is not attending the event  -->
+              	<div class="text-end attend-users"><i class="bi bi-people-fill"></i>{{ numAttend() }}</div>
+				<div style="cursor: pointer;" [class]="color()" (click)='attendEvent()'><i [class]="thumb()"></i>{{ going() }}</div>
             </div>
         </div>
 	</div>

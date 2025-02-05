@@ -8,11 +8,11 @@ import { EncodeBase64Directive } from '../../shared/directives/encode-base64.dir
 import { MyGeolocation } from '../../shared/services/my-geolocation';
 
 @Component({
-	selector: 'register',
+    selector: 'register',
 	standalone: true,
-	imports: [RouterLink, ReactiveFormsModule, ValidationClassesDirective, EncodeBase64Directive],
-	templateUrl: './register.component.html',
-	styleUrls: ['./register.component.css']
+    imports: [RouterLink, ReactiveFormsModule, ValidationClassesDirective, EncodeBase64Directive],
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
 	#fb = inject(NonNullableFormBuilder);

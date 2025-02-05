@@ -5,7 +5,7 @@ export interface EventsResponse {
     events: MyEvent[];
     more: boolean;
     page: number;
-    count: number;
+    count: number;  
 }
 
 export interface SingleEventResponse {
@@ -26,4 +26,12 @@ export interface AvatarResponse {
 
 export interface UsersResponse {
     users: User[];
+}
+
+export interface CommentsResponse {
+    comments: Comment[];
+}
+
+export interface CommentResponse {
+    comment: Comment;
 }

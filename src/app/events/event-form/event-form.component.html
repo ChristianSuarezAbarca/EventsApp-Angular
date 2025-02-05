@@ -21,8 +21,12 @@
     </div>
     @if (newEvent.image){
       <img [src]="newEvent.image" alt="Image preview" id="imgPreview" class="img-thumbnail mb-3" style="height: 200px;">
-    }
+    }<br><br><br>
+    <ol-map [coordinates]="coordinates()">
+      <ga-autocomplete (locationChange)="changePlace($event)"></ga-autocomplete>
+      <ol-marker [coordinates]="coordinates()"></ol-marker>
+    </ol-map><br>
     <div>
       <button type="submit" class="btn btn-primary">Create</button>
-    </div>
+    </div><br>
 </form>

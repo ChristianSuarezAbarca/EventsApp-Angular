@@ -2,20 +2,27 @@
     <div class="container-fluid">
         <ul class="nav">
           	<li class="nav-item">
-            	<button class="nav-link" id="orderDate" (click)=orderByDate()>Order by date</button>
+            	<button class="nav-link" (click)="order('date', false)">Order by date</button>
           	</li>
           	<li class="nav-item">
-            	<button class="nav-link" id="orderPrice" (click)=orderByPrice()>Order by price</button>
+            	<button class="nav-link" (click)="order('price', false)">Order by price</button>
+          	</li>
+            <li class="nav-item">
+            	<button class="nav-link" (click)="order('distance', false)">Order by distance</button>
           	</li>
         </ul>
         <form class="d-flex mb-0">
-          	<input class="form-control me-2" type="text" name="search" id="search" placeholder="Search" aria-label="Search" #searchInput (input)="search.set(searchInput.value)">
+          	<input class="form-control me-2" type="text" name="search" id="search" placeholder="Search" aria-label="Search" #searchInput (input)="search.set(searchInput.value); order(orderedBy, false)">
         </form>
     </div>
 </nav>
 
+<div class="text-muted" id="filterInfo">Ordering by: {{ orderedBy }}, Searching by: {{ search() }}</div>
+
 <div class="mb-4 mt-4 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
-  @for (event of newEvents(); track event.id) {
+  @for (event of events(); track event.id) {
   	<event-card class="col" [event]="event" (deleted)="deleteEvent($event)"></event-card>
   }
 </div>
+
+<div class="mb-4"><button id="loadMore" class="btn btn-primary" (click)="order(orderedBy, true)">Load More events</button></div>

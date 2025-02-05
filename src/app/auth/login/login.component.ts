@@ -6,11 +6,14 @@ import { UserLogin, UserLoginGoogle } from '../../shared/interfaces/user';
 import { NonNullableFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ValidationClassesDirective } from '../../shared/directives/validation-classes.directive';
 import { GoogleLoginDirective } from '../../google-login/google-login.directive';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { FbLoginDirective } from '../../facebook-login/fb-login.directive';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
 	selector: 'login',
 	standalone: true,
-	imports: [RouterLink, ValidationClassesDirective, ReactiveFormsModule, GoogleLoginDirective],
+	imports: [RouterLink, ValidationClassesDirective, ReactiveFormsModule, GoogleLoginDirective, FbLoginDirective, FontAwesomeModule],
 	templateUrl: './login.component.html',
 	styleUrl: './login.component.css'
 })
@@ -18,8 +21,8 @@ export class LoginComponent {
 	#fb = inject(NonNullableFormBuilder);
 	#authService = inject(AuthService);
 	#router = inject(Router);
-	// iconFacebook = faFacebook;
-	
+	iconFacebook = faFacebook;
+
 	user: UserLogin = {
 		email: '',
 		password: '',
@@ -34,7 +37,7 @@ export class LoginComponent {
 	};
 
 	loginForm = this.#fb.group({
-		email: ['', [Validators.required]],
+		email: ['', [Validators.required, Validators.email]],
 		password: ['', [Validators.required]]
 	});
 
@@ -58,13 +61,22 @@ export class LoginComponent {
 		const location = await MyGeolocation.getLocation();
 		const lat = location.latitude;
 		const lng = location.longitude;
-		
+
 		this.userGoogle = {
 			token: resp.credential,
 			lat: lat,
 			lng: lng
 		}
-
+		console.log(resp.credential);
 		this.#authService.loginGoogle(this.userGoogle).subscribe(() => { this.#router.navigate(['/events']); });
+	}
+
+	loggedFacebook(resp: fb.StatusResponse) {
+		// Envía esto a tu API
+		console.log(resp.authResponse.accessToken);
+	}
+
+	showError(error: unknown) {
+		console.error(error);
 	}
 }

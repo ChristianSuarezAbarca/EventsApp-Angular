@@ -9,5 +9,5 @@ import { provideGoogleId } from './google-login/google-login.config';
 import { provideFacebookId } from './facebook-login/facebook-login.config';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideGoogleId('290544365698-38tjk1j6b79v9hltq0iav71jccfha5ug.apps.googleusercontent.com'), provideFacebookId('623885330111293', 'v22.0'), provideExperimentalZonelessChangeDetection(), provideRouter(routes, withComponentInputBinding(), withPreloading(PreloadAllModules)), provideHttpClient(withInterceptors([baseUrlInterceptor, authInterceptor]))]
+  providers: [provideGoogleId('746820501392-oalflicqch2kuc12s8rclb5rf7b1fist.apps.googleusercontent.com'), provideFacebookId('623885330111293', 'v22.0'), provideExperimentalZonelessChangeDetection(), provideRouter(routes, withComponentInputBinding(), withPreloading(PreloadAllModules)), provideHttpClient(withInterceptors([baseUrlInterceptor, authInterceptor]))]
 };

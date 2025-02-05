@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "exercise-week8-yo": {
+    "angular-svtickets": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/exercise-week8-yo",
+            "outputPath": "dist/angular-svtickets",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
@@ -24,9 +24,13 @@
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "polyfills": [
+              "@angular/localize/init"
+            ]
           },
           "configurations": {
             "production": {
@@ -56,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "exercise-week8-yo:build:production"
+              "buildTarget": "angular-svtickets:build:production"
             },
             "development": {
-              "buildTarget": "exercise-week8-yo:build:development"
+              "buildTarget": "angular-svtickets:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +84,10 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "polyfills": [
+              "@angular/localize/init"
+            ]
           }
         },
         "lint": {

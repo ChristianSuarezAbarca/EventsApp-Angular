@@ -8,6 +8,9 @@
             @if(emailErrors?.['required']) {
                 <div class="invalid-feedback">Email is required</div>
             }
+            @if(emailErrors?.['email']) {
+                    <div class="invalid-feedback">Email should be like that: example&#64;gmail.com</div>
+            }
         </div>
         <div class="mb-3">
             <label for="password">Password:</label>
@@ -17,9 +20,18 @@
                 <div class="invalid-feedback">Password is required</div>
             }
         </div>
-        <a class="btn btn-secondary" role="button" [routerLink]="['/register']">Create account</a>
+        <a class="btn btn-secondary" role="button" [routerLink]="['/register']">Create account</a>&nbsp;&nbsp;
         <button type="submit" class="btn btn-primary">Login</button>
         <google-login class="btn" (login)="loggedGoogle($event)"></google-login>
-        <button fbLogin [scopes]="['email', 'public_profile']" class="btn btn-primary" (loginOk)="loggedFacebook($event)" (loginError)="showError($event)"><fa-icon [icon]="iconFacebook"></fa-icon>Login con Facebook</button>
+        <button
+  fbLogin
+  [scopes]="['email', 'public_profile']"
+  class="btn btn-primary"
+  (loginOk)="loggedFacebook($event)"
+  (loginError)="showError($event)"
+>
+  <fa-icon [icon]="iconFacebook"></fa-icon>
+  Login con Facebook
+</button>
     </form>
 </div>
